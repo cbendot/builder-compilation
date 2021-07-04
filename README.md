@@ -1,1 +1,1 @@
-<center><code>simple toolchain builder </script></code></center>
+simple toolchain builder </script>
