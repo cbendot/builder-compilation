@@ -41,7 +41,7 @@ START=$(date +"%s")
 function check() {
 echo ================================================
 echo xKernelCompiler
-echo version : rev1.5 - gaspoll
+echo version : rev1.5 - gaspoll modified
 echo ================================================
 echo BUILDER NAME = ${KBUILD_BUILD_USER}
 echo BUILDER HOSTNAME = ${KBUILD_BUILD_HOST}
