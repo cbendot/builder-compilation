@@ -60,7 +60,6 @@ tg_post_msg() {
   -d "disable_web_page_preview=true" \
   -d "parse_mode=html" \
   -d text="$1"
-
 }
 
 # Post Main Information
