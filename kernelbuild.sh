@@ -15,6 +15,9 @@
 # BUILD_USER | Your username
 # BUILD_HOST | Your hostname
 
+echo "installed java . . ."
+apt-get -y install default-jre
+
 echo "Downloading few Dependecies . . ."
 # Kernel Sources
 git clone --depth=1 $KERNEL_SOURCE $KERNEL_BRANCH $DEVICE_CODENAME
@@ -113,9 +116,9 @@ function finerr() {
 function zipping() {
     cd AnyKernel || exit 1
     zip -r9 [NLV]$KERNEL_NAME-${ZIP_DATE}.zip * -x .git README.md anykernel.sh .gitignore zipsigner* *.zip
-    msg "|| Signing Zip ||"
 tg_post_msg "<code>Signing Zip file with AOSP keys..</code>"
-java -jar zipsigner-3.0.jar $KERNEL_NAME.zip $KERNEL_NAME-signed.zip
+cd Anykernel
+java -jar zipsigner-3.0.jar $[NLV]KERNEL_NAME.zip $[NLV]KERNEL_NAME-signed.zip
 
 }
 
