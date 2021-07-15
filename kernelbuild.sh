@@ -15,7 +15,6 @@
 # BUILD_USER | Your username
 # BUILD_HOST | Your hostname
 
-echo "installed java . . ."
 apt-get -y install default-jre
 
 echo "Downloading few Dependecies . . ."
@@ -55,6 +54,27 @@ echo KERNEL_ROOTDIR = ${KERNEL_ROOTDIR}
 echo ================================================
 }
 
+msg() {
+	echo
+    echo -e "\e[1;32m$*\e[0m"
+    echo
+}
+
+err() {
+    echo -e "\e[1;41m$*\e[0m"
+}
+
+SIGN=0
+	if [ $SIGN = 1 ]
+	then
+		#Check for java
+		if command -v java > /dev/null 2>&1; then
+			SIGN=1
+		else
+			SIGN=0
+		fi
+	fi
+
 # Telegram
 export BOT_MSG_URL="https://api.telegram.org/bot$TG_TOKEN/sendMessage"
 
@@ -66,7 +86,7 @@ tg_post_msg() {
 }
 
 # Post Main Information
-tg_post_msg "<b>🔨 Building Kernel Started!</b>%0A<b>Builder Name: </b><code>${KBUILD_BUILD_USER}</code>%0A<b>Builder Host: </b><code>${KBUILD_BUILD_HOST}</code>%0A<b>Build For: </b><code>$DEVICE_CODENAME</code>%0A<b>Build Date: </b><code>$DATE</code>%0A<b>Build started on: </b><code>Drone CI</code>%0A<b>Clang Rootdir : </b><code>${CLANG_ROOTDIR}</code>%0A<b>Kernel Rootdir : </b><code>${KERNEL_ROOTDIR}</code>%0A<b>Compiler Info:</b>%0A<code>${KBUILD_COMPILER_STRING}</code>%0A%0A1:00 ●━━━━━━─────── 2:00 ⇆ㅤㅤㅤ ㅤ◁ㅤㅤ❚❚ㅤㅤ▷ㅤㅤㅤㅤ↻"
+tg_post_msg "<b>🔨 Building Kernel Started!</b>%0A<b>Builder Name: </b><code>${KBUILD_BUILD_USER}</code>%0A<b>Builder Host: </b><code>${KBUILD_BUILD_HOST}</code>%0A<b>Build For: </b><code>$DEVICE_CODENAME</code>%0A<b>Build Date: </b><code>$DATE</code>%0A<b>Build started on: </b><code>DroneCI</code>%0A<b>Clang Rootdir : </b><code>${CLANG_ROOTDIR}</code>%0A<b>Kernel Rootdir : </b><code>${KERNEL_ROOTDIR}</code>%0A<b>Compiler Info:</b>%0A<code>${KBUILD_COMPILER_STRING}</code>%0A%0A1:00 ●━━━━━━─────── 2:00 ⇆ㅤㅤㅤ ㅤ◁ㅤㅤ❚❚ㅤㅤ▷ㅤㅤㅤㅤ↻"
 
 # Compile
 compile(){
@@ -115,11 +135,19 @@ function finerr() {
 # Zipping
 function zipping() {
     cd AnyKernel || exit 1
-    zip -r9 [NLV]$KERNEL_NAME-${ZIP_DATE}.zip * -x .git README.md anykernel.sh .gitignore zipsigner* *.zip
-tg_post_msg "<code>Signing Zip file with AOSP keys..</code>"
-cd Anykernel
-java -jar zipsigner-3.0.jar $[NLV]KERNEL_NAME.zip $[NLV]KERNEL_NAME-signed.zip
+    zip -r9 [NLV]${ZIP_DATE}.zip * -x .git README.md anykernel.sh .gitignore zipsigner* *.zip
 
+if [ $SIGN = 1 ]
+	then
+		## Sign the zip before sending it to telegram
+		if [ "$PTTG" = 1 ]
+ 		then
+ 			msg "|| Signing Zip ||"
+			tg_post_msg "<code>Signing Zip file with AOSP keys..</code>"
+		cd AnyKernel
+		java -jar zipsigner-3.0.jar [NLV]$KERNEL_NAME.zip [NLV]$KERNEL_NAME-signed.zip
+	fi
+	
 }
 
 check
