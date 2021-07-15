@@ -145,6 +145,7 @@ if [ $SIGN = 1 ]
  			msg "|| Signing Zip ||"
 			tg_post_msg "<code>Signing Zip file with AOSP keys..</code>"
 		cd AnyKernel
+                curl -sLo zipsigner-3.0.jar https://github.com/Magisk-Modules-Repo/zipsigner/raw/master/bin/zipsigner-3.0-dexed.jar
 		java -jar zipsigner-3.0.jar [NLV]$KERNEL_NAME.zip [NLV]$KERNEL_NAME-signed.zip
 	fi
 cd ..	
