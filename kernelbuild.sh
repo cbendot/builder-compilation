@@ -64,7 +64,7 @@ err() {
     echo -e "\e[1;41m$*\e[0m"
 }
 
-SIGN=0
+SIGN=1
 	if [ $SIGN = 1 ]
 	then
 		#Check for java
