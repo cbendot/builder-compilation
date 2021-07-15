@@ -135,7 +135,9 @@ function finerr() {
 # Zipping
 function zipping() {
     cd AnyKernel || exit 1
-    zip -r9 [NLV]${ZIP_DATE}.zip * -x .git README.md anykernel.sh .gitignore zipsigner* *.zip
+    zip -r9 [NLV]$KERNEL_NAME.zip * -x .git README.md anykernel.sh .gitignore zipsigner* *.zip
+
+cd ..
 
 if [ $SIGN = 1 ]
 	then
@@ -145,7 +147,7 @@ if [ $SIGN = 1 ]
 		cd AnyKernel
 		java -jar zipsigner-3.0.jar [NLV]$KERNEL_NAME.zip [NLV]$KERNEL_NAME-signed.zip
 	fi
-	
+cd ..	
 }
 
 check
