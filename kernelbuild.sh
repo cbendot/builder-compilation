@@ -140,8 +140,6 @@ function zipping() {
 if [ $SIGN = 1 ]
 	then
 		## Sign the zip before sending it to telegram
-		if [ "$PTTG" = 1 ]
- 		then
  			msg "|| Signing Zip ||"
 			tg_post_msg "<code>Signing Zip file with AOSP keys..</code>"
 		cd AnyKernel
