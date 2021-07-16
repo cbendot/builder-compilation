@@ -135,7 +135,7 @@ function finerr() {
 # Zipping
 function zipping() {
     cd AnyKernel || exit 1
-    zip -r9 [NLV]$KERNEL_NAME-${ZIP_DATE}.zip * -x .git README.md anykernel.sh .gitignore zipsigner* *.zip
+    zip -r9 [NLV][OC]$KERNEL_NAME-${ZIP_DATE}.zip * -x .git README.md anykernel.sh .gitignore zipsigner* *.zip
 
 cd ..
 
@@ -145,7 +145,7 @@ if [ $SIGN = 1 ]
  			msg "|| Signing Zip ||"
 			tg_post_msg "<code>Signing Zip file with AOSP keys..</code>"
 		cd AnyKernel
-		java -jar zipsigner-3.0.jar [NLV]$KERNEL_NAME-${ZIP_DATE}.zip [NLV]$KERNEL_NAME-${ZIP_DATE}-signed.zip
+		java -jar zipsigner-3.0.jar [NLV][OC]$KERNEL_NAME-${ZIP_DATE}.zip [NLV][OC]$KERNEL_NAME-${ZIP_DATE}-signed.zip
 	fi 
 cd ..	
 }
