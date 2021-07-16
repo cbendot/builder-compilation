@@ -17,7 +17,7 @@
 
 apt-get -y install default-jre
 
-echo "Downloading few Dependecies . . ."
+msg "|| Downloading few Dependecies . . .||"
 # Kernel Sources
 git clone --depth=1 $KERNEL_SOURCE $KERNEL_BRANCH $DEVICE_CODENAME
 git clone --depth=1 https://github.com/cbendot/elastics-toolchain Elastics # Elastics set as Clang Default
@@ -35,7 +35,7 @@ LLD_VER="$("$CLANG_ROOTDIR"/bin/ld.lld --version | head -n 1)"
 export KBUILD_COMPILER_STRING="$CLANG_VER with $LLD_VER"
 IMAGE=$(pwd)/$DEVICE_CODENAME/out/arch/arm64/boot/Image.gz-dtb
 DATE=$(date "+%B %-d, %Y")
-ZIP_DATE=$(date +"%Y%m%d-%H%M")
+ZIP_DATE=$(date +"%Y%m%d")
 START=$(date +"%s")
 
 # Checking environtment
@@ -135,7 +135,7 @@ function finerr() {
 # Zipping
 function zipping() {
     cd AnyKernel || exit 1
-    zip -r9 [NLV]$KERNEL_NAME.zip * -x .git README.md anykernel.sh .gitignore zipsigner* *.zip
+    zip -r9 [NLV]$KERNEL_NAME-${ZIP_DATE}.zip * -x .git README.md anykernel.sh .gitignore zipsigner* *.zip
 
 cd ..
 
@@ -145,9 +145,8 @@ if [ $SIGN = 1 ]
  			msg "|| Signing Zip ||"
 			tg_post_msg "<code>Signing Zip file with AOSP keys..</code>"
 		cd AnyKernel
-                curl -sLo zipsigner-3.0.jar https://github.com/Magisk-Modules-Repo/zipsigner/raw/master/bin/zipsigner-3.0-dexed.jar
-		java -jar zipsigner-3.0.jar [NLV]$KERNEL_NAME.zip [NLV]$KERNEL_NAME-signed.zip
-	fi
+		java -jar zipsigner-3.0.jar [NLV]$KERNEL_NAME-${ZIP_DATE}.zip [NLV]$KERNEL_NAME-${ZIP_DATE}-signed.zip
+	fi 
 cd ..	
 }
 
