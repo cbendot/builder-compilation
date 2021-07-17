@@ -15,9 +15,7 @@
 # BUILD_USER | Your username
 # BUILD_HOST | Your hostname
 
-apt-get -y install default-jre
-
-msg "|| Downloading few Dependecies . . .||"
+echo "|| Downloading few Dependecies . . .||"
 # Kernel Sources
 git clone --depth=1 $KERNEL_SOURCE $KERNEL_BRANCH $DEVICE_CODENAME
 git clone --depth=1 https://github.com/cbendot/elastics-toolchain Elastics # Elastics set as Clang Default
@@ -53,27 +51,6 @@ echo CLANG_ROOTDIR = ${CLANG_ROOTDIR}
 echo KERNEL_ROOTDIR = ${KERNEL_ROOTDIR}
 echo ================================================
 }
-
-msg() {
-	echo
-    echo -e "\e[1;32m$*\e[0m"
-    echo
-}
-
-err() {
-    echo -e "\e[1;41m$*\e[0m"
-}
-
-SIGN=1
-	if [ $SIGN = 1 ]
-	then
-		#Check for java
-		if command -v java > /dev/null 2>&1; then
-			SIGN=1
-		else
-			SIGN=0
-		fi
-	fi
 
 # Telegram
 export BOT_MSG_URL="https://api.telegram.org/bot$TG_TOKEN/sendMessage"
@@ -135,21 +112,9 @@ function finerr() {
 # Zipping
 function zipping() {
     cd AnyKernel || exit 1
-    zip -r9 [NLV]$KERNEL_NAME-${ZIP_DATE}.zip * -x .git README.md anykernel.sh .gitignore zipsigner* *.zip
-
-cd ..
-
-if [ $SIGN = 1 ]
-	then
-		## Sign the zip before sending it to telegram
- 			msg "|| Signing Zip ||"
-			tg_post_msg "<code>Signing Zip file with AOSP keys..</code>"
-                curl -sLo zipsigner-3.0.jar https://github.com/Magisk-Modules-Repo/zipsigner/raw/master/bin/zipsigner-3.0-dexed.jar
-		java -jar zipsigner-3.0.jar [NLV]$KERNEL_NAME-${ZIP_DATE}.zip [NLV]$KERNEL_NAME-${ZIP_DATE}-signed.zip
-	fi 
-cd ..	
+    zip -r9 [NLV]$KERNEL_NAME-${ZIP_DATE}.zip *
+    cd ..
 }
-
 check
 compile
 zipping
