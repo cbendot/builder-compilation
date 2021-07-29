@@ -112,7 +112,7 @@ function finerr() {
 # Zipping
 function zipping() {
     cd AnyKernel || exit 1
-    zip -r9 [LV][CAF]$KERNEL_NAME-${ZIP_DATE}.zip *
+    zip -r9 [LV]$KERNEL_NAME-${ZIP_DATE}.zip *
     cd ..
 }
 check
