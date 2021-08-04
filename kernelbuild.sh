@@ -2,7 +2,7 @@
 #
 # Copyright (C) 2021 a xyzprjkt property
 #
-
+#
 # Needed Secret Variable
 # KERNEL_NAME | Your kernel name
 # KERNEL_SOURCE | Your kernel link source
