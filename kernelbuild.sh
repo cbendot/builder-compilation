@@ -2,7 +2,7 @@
 #
 # Copyright (C) 2021 a xyzprjkt property
 #
-#
+
 # Needed Secret Variable
 # KERNEL_NAME | Your kernel name
 # KERNEL_SOURCE | Your kernel link source
@@ -63,7 +63,7 @@ tg_post_msg() {
 }
 
 # Post Main Information
-tg_post_msg "<b>🔨 Building Kernel Started!</b>%0A<b>Builder Name: </b><code>${KBUILD_BUILD_USER}</code>%0A<b>Builder Host: </b><code>${KBUILD_BUILD_HOST}</code>%0A<b>Build For: </b><code>$DEVICE_CODENAME</code>%0A<b>Build Date: </b><code>$DATE</code>%0A<b>Build started on: </b><code>DroneCI</code>%0A<b>Clang Rootdir : </b><code>${CLANG_ROOTDIR}</code>%0A<b>Kernel Rootdir : </b><code>${KERNEL_ROOTDIR}</code>%0A<b>Compiler Info:</b>%0A<code>${KBUILD_COMPILER_STRING}</code>%0A%0A1:00 ●━━━━━━─────── 2:00 ⇆ㅤㅤㅤ ㅤ◁ㅤㅤ❚❚ㅤㅤ▷ㅤㅤㅤㅤ↻"
+tg_post_msg "<b>🔨 Building Kernel Started!</b>%0A<b>Builder Name: </b><code>${KBUILD_BUILD_USER}</code>%0A<b>Builder Host: </b><code>${KBUILD_BUILD_HOST}</code>%0A<b>Build For: </b><code>$DEVICE_CODENAME</code>%0A<b>Build Date: </b><code>$DATE</code>%0A<b>Build started on: </b><code>CircleCI</code>%0A<b>Clang Rootdir : </b><code>${CLANG_ROOTDIR}</code>%0A<b>Kernel Rootdir : </b><code>${KERNEL_ROOTDIR}</code>%0A<b>Compiler Info:</b>%0A<code>${KBUILD_COMPILER_STRING}</code>%0A%0A1:00 ●━━━━━━─────── 2:00 ⇆ㅤㅤㅤ ㅤ◁ㅤㅤ❚❚ㅤㅤ▷ㅤㅤㅤㅤ↻"
 
 # Compile
 compile(){
@@ -71,11 +71,11 @@ tg_post_msg "<b>xKernelCompiler:</b><code>Compilation has started"
 cd ${KERNEL_ROOTDIR}
 make -j$(nproc) O=out ARCH=arm64 ${DEVICE_DEFCONFIG}
 make -j$(nproc) ARCH=arm64 O=out \
-    CC=${CLANG_ROOTDIR}/bin/clang \    
-    AR=${CLANG_ROOTDIR}/bin/llvm-ar \        
-  	NM=${CLANG_ROOTDIR}/bin/llvm-nm \        
+    CC=${CLANG_ROOTDIR}/bin/clang \
+    AR=${CLANG_ROOTDIR}/bin/llvm-ar \
+  	NM=${CLANG_ROOTDIR}/bin/llvm-nm \
   	OBJCOPY=${CLANG_ROOTDIR}/bin/llvm-objcopy \
-  	OBJDUMP=${CLANG_ROOTDIR}/bin/llvm-objdump \    
+  	OBJDUMP=${CLANG_ROOTDIR}/bin/llvm-objdump \
     STRIP=${CLANG_ROOTDIR}/bin/llvm-strip \
     CROSS_COMPILE=${CLANG_ROOTDIR}/bin/aarch64-linux-gnu- \
     CROSS_COMPILE_ARM32=${CLANG_ROOTDIR}/bin/arm-linux-gnueabi-
@@ -114,6 +114,7 @@ function zipping() {
     cd AnyKernel || exit 1
     zip -r9 [LV]$KERNEL_NAME-EAS-${ZIP_DATE}.zip *
     cd ..
+
 }
 check
 compile
