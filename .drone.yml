@@ -3,7 +3,7 @@ name : LLVM Toolchain Compiler
 version: rev1.5_template
 steps:
  - name: LLVM-tc Compilation
-   image: clangbuiltlinux/ubuntu:latest
+   image: panchajanya1999/archlinux:latest
    environment:
      LLVM_NAME:
        from_secret: LLVM_NAME
@@ -20,5 +20,4 @@ steps:
      GH_PUSH_REPO_URL:
        from_secret: GH_PUSH_REPO_URL
    commands:
-     - apt update && apt upgrade -y
      - bash llvm-tc_build.sh
