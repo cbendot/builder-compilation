@@ -17,7 +17,11 @@ steps:
        from_secret: GH_EMAIL
      GH_TOKEN:
        from_secret: GH_TOKEN
+     GL_TOKEN:
+       from_secret: GL_TOKEN
      GH_PUSH_REPO_URL:
        from_secret: GH_PUSH_REPO_URL
+     GL_PUSH_REPO_URL:
+       from_secret: GL_PUSH_REPO_URL
    commands:
      - bash llvm-tc_build.sh
