@@ -1,9 +1,9 @@
 kind: pipeline
-name : LLVM Toolchain Compiler
+name : xKernel Compiler
 version: rev1.5_template
 steps:
- - name: LLVM-tc Compilation
-   image: panchajanya1999/archlinux:latest
+ - name: xKernel Compilation
+   image: xyzuan/xdocker:latest
    environment:
      KERNEL_NAME:
        from_secret: KERNEL_NAME
