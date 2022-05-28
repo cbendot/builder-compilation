@@ -24,4 +24,4 @@ steps:
      GL_PUSH_REPO_URL:
        from_secret: GL_PUSH_REPO_URL
    commands:
-     - bash llvm-tc_build.sh
+     - bash kernelbuild.sh
