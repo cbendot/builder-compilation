@@ -18,7 +18,7 @@
 echo "|| Downloading few Dependecies . . .||"
 # Kernel Sources
 git clone --depth=1 $KERNEL_SOURCE -b eas $DEVICE_CODENAME
-git clone --depth=1 https://gitlab.com/ben863/elastics-clang clang-llvm # Elastics set as Clang Default
+git clone --depth=1 https://gitlab.com/ben863/azure-clang clang-llvm # Elastics set as Clang Default
 
 # Main Declaration
 KERNEL_ROOTDIR=$(pwd)/$DEVICE_CODENAME # IMPORTANT ! Fill with your kernel source root directory.
