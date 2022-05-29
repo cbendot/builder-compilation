@@ -18,9 +18,10 @@
 echo "|| Downloading few Dependecies . . .||"
 # Kernel Sources
 git clone --depth=1 $KERNEL_SOURCE $KERNEL_BRANCH $DEVICE_CODENAME
-# git clone --depth=1 https://gitlab.com/ben863/azure-clang.git clang # clang set as Default
-git clone --depth=1 https://github.com/cbendot/aarch64.git gcc64 # gcc64 set as Default
-git clone --depth=1 https://github.com/cbendot/armv7.git gcc32 # gcc32 set as Default
+# git clone --deoth=1 https://github.com/mvaisakh/gcc-arm64.git gcc64 # gcc64 set as Default
+# git clone --depth=1 https://github.com/mvaisakh/gcc-arm.git gcc32 # gcc32 set as Default
+git clone --depth=1 https://github.com/cbendot/gcc-aarch64.git gcc64 # gcc64 set as Default
+git clone --depth=1 https://github.com/cbendot/gcc-armv7.git gcc32 # gcc32 set as Default
 
 # Main Declaration
 KERNEL_ROOTDIR=$(pwd)/$DEVICE_CODENAME # IMPORTANT ! Fill with your kernel source root directory.
