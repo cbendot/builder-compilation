@@ -3,7 +3,7 @@ name : LLVM Toolchain Compiler
 version: rev1.5_template
 steps:
  - name: LLVM-tc Compilation
-   image: xyzuan/xdocker:latest
+   image: panchajanya1999/archlinux:latest
    environment:
      LLVM_NAME:
        from_secret: LLVM_NAME
@@ -24,5 +24,4 @@ steps:
      GL_PUSH_REPO_URL:
        from_secret: GL_PUSH_REPO_URL
    commands:
-          - apt-get autoremove -y && apt-get --purge remove -y && apt-get autoclean -y && apt-get update -y && apt-get upgrade -y && apt-get dist-upgrade -y
           - bash llvm-tc_build.sh
