@@ -67,7 +67,7 @@ tg_post_msg "<b>Building Kernel Started!</b>%0A<b>Triggered by: </b><code>ben863
 
 # Compile
 compile(){
-tg_post_msg "<b>xKernelCompiler:</b><code>Compilation has started"
+tg_post_msg "<b>$KERNEL_NAME</b>%0A<b>Source: </b>$KERNEL_SOURCE"
 cd ${KERNEL_ROOTDIR}
 make -j$(nproc) O=out ARCH=arm64 ${DEVICE_DEFCONFIG}
 make -j$(nproc) ARCH=arm64 O=out \
@@ -113,7 +113,7 @@ function finerr() {
 # Zipping
 function zipping() {
     cd AnyKernel || exit 1
-    zip -r9 $KERNEL_NAME-EAS[OC]-${ZIP_DATE}.zip *
+    zip -r9 $KERNEL_NAME-EAS-${ZIP_DATE}.zip *
     cd ..
 
 }
