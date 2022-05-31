@@ -17,11 +17,11 @@
 
 echo "|| Downloading few Dependecies . . .||"
 # Kernel Sources
-git clone --depth=1 $KERNEL_SOURCE $KERNEL_BRANCH $DEVICE_CODENAME
-# git clone --deoth=1 https://github.com/mvaisakh/gcc-arm64.git gcc64 # gcc64 set as Default
-# git clone --depth=1 https://github.com/mvaisakh/gcc-arm.git gcc32 # gcc32 set as Default
+git clone --depth=1 $KERNEL_SOURCE -b eas $DEVICE_CODENAME
 git clone --depth=1 https://github.com/cbendot/gcc-aarch64.git gcc64 # gcc64 set as Default
 git clone --depth=1 https://github.com/cbendot/gcc-armv7.git gcc32 # gcc32 set as Default
+# git clone --deoth=1 https://github.com/mvaisakh/gcc-arm64.git gcc64 # gcc64 set as Default
+# git clone --depth=1 https://github.com/mvaisakh/gcc-arm.git gcc32 # gcc32 set as Default
 
 # Main Declaration
 KERNEL_ROOTDIR=$(pwd)/$DEVICE_CODENAME # IMPORTANT ! Fill with your kernel source root directory.
@@ -70,11 +70,11 @@ tg_post_msg() {
 }
 
 # Post Main Information
-tg_post_msg "<b>Building Kernel Started!</b>%0A<b>Triggered by: </b><code>ben863</code>%0A<b>Pipelines Host: </b><code>DroneCI</code>%0A<b>Build For: </b><code>$DEVICE_CODENAME</code>%0A<b>Build Date: </b><code>$DATE</code>%0A<b>Compiler Info:</b>%0A<code>${KBUILD_COMPILER_STRING}</code>"
+tg_post_msg "<b>Building Kernel Started!</b>%0A<b>Triggered by: </b><code>ben863</code>%0A<b>Pipelines Hosts: </b><code>DroneCI</code>%0A<b>Build For: </b><code>$DEVICE_CODENAME</code>%0A<b>Build Date: </b><code>$DATE</code>%0A<b>Compiler Info:</b>%0A<code>${KBUILD_COMPILER_STRING}</code>"
 
 # Compile
 compile(){
-tg_post_msg "<b>xKernelCompiler:</b><code>Compilation has started"
+tg_post_msg "<b>$KERNEL_NAME</b>%0A<b>Source: </b>$KERNEL_SOURCE"
 cd ${KERNEL_ROOTDIR}
 make -j$(nproc) O=out ARCH=arm64 ${DEVICE_DEFCONFIG}
 make -j$(nproc) ARCH=arm64 O=out \
@@ -119,7 +119,7 @@ function finerr() {
 # Zipping
 function zipping() {
     cd AnyKernel || exit 1
-    zip -r9 [LV]$KERNEL_NAME-HMP-${ZIP_DATE}.zip *
+    zip -r9 $KERNEL_NAME-EAS-${ZIP_DATE}.zip *
     cd ..
 
 }
