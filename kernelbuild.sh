@@ -17,7 +17,7 @@
 
 echo "|| Downloading few Dependecies . . .||"
 # Kernel Sources
-git clone --depth=1 $KERNEL_SOURCE -b eas $DEVICE_CODENAME
+git clone --depth=1 $KERNEL_SOURCE -b hmp $DEVICE_CODENAME
 git clone --depth=1 https://gitlab.com/ben863/azure-clang clang-llvm # Elastics set as Clang Default
 
 # Main Declaration
@@ -31,6 +31,8 @@ export KBUILD_BUILD_HOST=$BUILD_HOST # Change with your own hostname.
 CLANG_VER="$("$CLANG_ROOTDIR"/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
 LLD_VER="$("$CLANG_ROOTDIR"/bin/ld.lld --version | head -n 1)"
 export KBUILD_COMPILER_STRING="$CLANG_VER with $LLD_VER"
+LINUX_VER=$(make kernelversion)
+COMMIT_HEAD=$(git log --oneline -1)
 IMAGE=$(pwd)/$DEVICE_CODENAME/out/arch/arm64/boot/Image.gz-dtb
 DATE=$(date "+%B %-d, %Y")
 ZIP_DATE=$(date +"%Y%m%d")
@@ -67,7 +69,7 @@ tg_post_msg "<b>Building Kernel Started!</b>%0A<b>Triggered by: </b><code>ben863
 
 # Compile
 compile(){
-tg_post_msg "<b>$KERNEL_NAME</b>%0A<b>Source: </b>$KERNEL_SOURCE"
+tg_post_msg "<b>$KERNEL_NAME $LINUX_VER</b>%0A<b>Last commit:</b> $COMMIT_HEAD%0A<b>Source:</b> $KERNEL_SOURCE"
 cd ${KERNEL_ROOTDIR}
 make -j$(nproc) O=out ARCH=arm64 ${DEVICE_DEFCONFIG}
 make -j$(nproc) ARCH=arm64 O=out \
@@ -113,7 +115,7 @@ function finerr() {
 # Zipping
 function zipping() {
     cd AnyKernel || exit 1
-    zip -r9 $KERNEL_NAME-EAS-${ZIP_DATE}.zip *
+    zip -r9 [OC]$KERNEL_NAME-HMP-${ZIP_DATE}.zip *
     cd ..
 
 }
