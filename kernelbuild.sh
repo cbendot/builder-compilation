@@ -17,7 +17,7 @@
 
 echo "|| Downloading few Dependecies . . .||"
 # Kernel Sources
-git clone --depth=1 $KERNEL_SOURCE -b eas $DEVICE_CODENAME
+git clone --depth=1 $KERNEL_SOURCE -b hmp $DEVICE_CODENAME
 git clone --depth=1 https://github.com/cbendot/gcc-aarch64.git gcc64 # gcc64 set as Default
 git clone --depth=1 https://github.com/cbendot/gcc-armv7.git gcc32 # gcc32 set as Default
 # git clone --deoth=1 https://github.com/mvaisakh/gcc-arm64.git gcc64 # gcc64 set as Default
@@ -119,7 +119,7 @@ function finerr() {
 # Zipping
 function zipping() {
     cd AnyKernel || exit 1
-    zip -r9 $KERNEL_NAME-EAS-${ZIP_DATE}.zip *
+    zip -r9 $KERNEL_NAME-HMP-${ZIP_DATE}.zip *
     cd ..
 
 }
