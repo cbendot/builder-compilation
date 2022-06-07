@@ -26,7 +26,6 @@ steps:
    commands:
           - cp -af sources.list /etc/apt/
           - apt-get update && apt-get upgrade -y
-          - dpkg-reconfigure -a && dpkg --configure -a
           - ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime && date
           - apt-get install -y bc binutils-dev bison build-essential ca-certificates ccache clang cmake curl file flex git libelf-dev libssl-dev lld make ninja-build python3-dev texinfo u-boot-tools xz-utils zlib1g-dev
           - "bash ./llvm-tc_build.sh"
