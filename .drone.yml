@@ -3,7 +3,7 @@ name : LLVM Toolchain Compiler
 version: rev1.5_template
 steps:
  - name: LLVM-tc Compilation
-   image: apon77/aosp:latest
+   image: ubuntu:latest
    environment:
      LLVM_NAME:
        from_secret: LLVM_NAME
@@ -24,4 +24,9 @@ steps:
      GL_PUSH_REPO_URL:
        from_secret: GL_PUSH_REPO_URL
    commands:
-          - bash llvm-tc_build.sh
+          - cp -af sources.list /etc/apt/
+          - apt-get update && apt-get upgrade -y
+          - dpkg-reconfigure -a && dpkg --configure -a
+          - ln -fs /usr/share/zoneinfo/Asia/Jakarta /etc/localtime && date
+          - apt-get install -y bc binutils-dev bison build-essential ca-certificates ccache clang cmake curl file flex git libelf-dev libssl-dev lld make ninja-build python3-dev texinfo u-boot-tools xz-utils zlib1g-dev
+          - "bash ./llvm-tc_build.sh"
