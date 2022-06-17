@@ -18,23 +18,22 @@
 echo "|| Downloading few Dependecies . . .||"
 # Kernel Sources
 git clone --depth=1 $KERNEL_SOURCE -b eas $DEVICE_CODENAME
-# git clone --depth=1 https://gitlab.com/ben863/elastics-clang clang-llvm # Elastics set as Clang Default
-git clone --depth=1 https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r450784.git clang-llvm
-git clone --depth=1 https://github.com/crdroidandroid/android_prebuilts_gcc_linux-x86_aarch64_aarch64-elf.git gcc64
-git clone --depth=1 https://github.com/crdroidandroid/android_prebuilts_gcc_linux-x86_arm_arm-eabi.git gcc32
+git clone --depth=1 https://gitlab.com/ben863/azure-clang clang-llvm # Elastics set as Clang Default
+git clone --depth=1 https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r450784.git clang-aosp
+# git clone --depth=1 https://github.com/crdroidandroid/android_prebuilts_gcc_linux-x86_aarch64_aarch64-elf.git gcc64
+# git clone --depth=1 https://github.com/crdroidandroid/android_prebuilts_gcc_linux-x86_arm_arm-eabi.git gcc32
 
 # Main Declaration
 KERNEL_ROOTDIR=$(pwd)/$DEVICE_CODENAME # IMPORTANT ! Fill with your kernel source root directory.
 DEVICE_DEFCONFIG=$DEVICE_DEFCONFIG # IMPORTANT ! Declare your kernel source defconfig file here.
-CLANG_ROOTDIR=$(pwd)/clang-llvm # IMPORTANT! Put your clang directory here.
-GCC64_ROOTDIR=$(pwd)/gcc64
-GCC32_ROOTDIR=$(pwd)/gcc32
+CLANG_ROOTDIR=$(pwd)/clang-aosp # IMPORTANT! Put your clang directory here.
+GCC64_ROOTDIR=$(pwd)/clang-llvm
 export KBUILD_BUILD_USER=$BUILD_USER # Change with your own name or else.
 export KBUILD_BUILD_HOST=$BUILD_HOST # Change with your own hostname.
 
 # Main Declaration
 CLANG_VER="$("$CLANG_ROOTDIR"/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
-LLD_VER="$("$GCC64_ROOTDIR"/bin/aarch64-elf-gcc --version | head -n 1)"
+LLD_VER="$("$GCC64_ROOTDIR"/bin/ld.lld --version | head -n 1)"
 export KBUILD_COMPILER_STRING="$CLANG_VER with $LLD_VER"
 COMMIT_HEAD=$(git log --oneline -1)
 IMAGE=$(pwd)/$DEVICE_CODENAME/out/arch/arm64/boot/Image.gz-dtb
@@ -83,8 +82,9 @@ make -j$(nproc) ARCH=arm64 O=out \
   	OBJCOPY=${CLANG_ROOTDIR}/bin/llvm-objcopy \
   	OBJDUMP=${CLANG_ROOTDIR}/bin/llvm-objdump \
     STRIP=${CLANG_ROOTDIR}/bin/llvm-strip \
-    CROSS_COMPILE=${GCC64_ROOTDIR}/bin/aarch64-elf-gcc- \
-    CROSS_COMPILE_ARM32=${GCC32_ROOTDIR}/bin/arm-eabi-gcc
+    CLANG_TRIPLE=${GCC64_ROOTDIR}/aarch64-linux-gnu- \
+    CROSS_COMPILE=${GCC64_ROOTDIR}/bin/aarch64-linux-gnu- \
+    CROSS_COMPILE_ARM32=${GCC64_ROOTDIR}/bin/arm-linux-gnueabi- 
 
    if ! [ -a "$IMAGE" ]; then
 	finerr
