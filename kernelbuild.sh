@@ -19,7 +19,8 @@ echo "|| Downloading few Dependecies . . .||"
 # Kernel Sources
 git clone --depth=1 $KERNEL_SOURCE -b eas $DEVICE_CODENAME
 # git clone --depth=1 https://gitlab.com/ben863/azure-clang clang-llvm # Elastics set as Clang Default
-git clone --depth=1 https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r450784.git clang-aosp
+# git clone --depth=1 https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r450784.git clang-aosp
+git clone --depth=1 https://github.com/RyuujiX/SDClang.git clang-aosp
 git clone --depth=1 https://github.com/RyuujiX/aarch64-linux-android-4.9.git gcc64
 git clone --depth=1 https://github.com/RyuujiX/arm-linux-androideabi-4.9.git gcc32
 
