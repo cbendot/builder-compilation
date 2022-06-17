@@ -83,6 +83,8 @@ make -j$(nproc) ARCH=arm64 O=out \
   	OBJCOPY=${CLANG_ROOTDIR}/bin/llvm-objcopy \
   	OBJDUMP=${CLANG_ROOTDIR}/bin/llvm-objdump \
     STRIP=${CLANG_ROOTDIR}/bin/llvm-strip \
+    PATH=$CLANG_ROOTDIR/bin:$GCC64_ROOTDIR/bin:$GCC32_ROOTDIR/bin:/usr/bin:${PATH} \
+    CLANG_TRIPLE=aarch64-linux-gnu- \
     CROSS_COMPILE=${GCC64_ROOTDIR}/bin/aarch64-linux-android- \
     CROSS_COMPILE_ARM32=${GCC32_ROOTDIR}/bin/arm-linux-androideabi- 
 
