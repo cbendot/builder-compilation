@@ -19,7 +19,8 @@ echo "|| Downloading few Dependecies . . .||"
 # Kernel Sources
 git clone --depth=1 $KERNEL_SOURCE -b hmp $DEVICE_CODENAME
 # git clone --depth=1 https://gitlab.com/ben863/azure-clang clang-llvm # Elastics set as Clang Default
-git clone --depth=1 https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r450784.git clang-aosp
+# git clone --depth=1 https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r450784.git clang-aosp
+git clone --depth=1 https://gitlab.com/STRK-ND/aosp-clang.git clang-aosp 
 git clone --depth=1 https://github.com/cbendot/gcc-aarch64.git gcc64
 git clone --depth=1 https://github.com/cbendot/gcc-armv7.git gcc32
 
@@ -35,9 +36,9 @@ export KBUILD_BUILD_HOST=$BUILD_HOST # Change with your own hostname.
 
 # Main Declaration
 CLANG_VER="$("$CLANG_ROOTDIR"/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
-LLD_VER="$("$CLANG_ROOTDIR"/bin/ld.lld --version | head -n 1)"
+# LLD_VER="$("$CLANG_ROOTDIR"/bin/ld.lld --version | head -n 1)"
 GCC_VER="$("$GCC64_ROOTDIR"/bin/aarch64-buildroot-linux-gnu-gcc --version | head -n 1)"
-export KBUILD_COMPILER_STRING="$CLANG_VER $LLD_VER $GCC_VER"
+export KBUILD_COMPILER_STRING="$CLANG_VER with $GCC_VER"
 COMMIT_HEAD=$(git log --oneline -1)
 IMAGE=$(pwd)/$DEVICE_CODENAME/out/arch/arm64/boot/Image.gz-dtb
 DATE=$(date "+%B %-d, %Y")
