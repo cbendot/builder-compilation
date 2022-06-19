@@ -39,7 +39,6 @@ CLANG_VER="$("$CLANG_ROOTDIR"/bin/clang --version | head -n 1 | perl -pe 's/\(ht
 # LLD_VER="$("$CLANG_ROOTDIR"/bin/ld.lld --version | head -n 1)"
 GCC_VER="$("$GCC64_ROOTDIR"/bin/aarch64-buildroot-linux-gnu-gcc --version | head -n 1)"
 export KBUILD_COMPILER_STRING="$CLANG_VER with $GCC_VER"
-COMMIT_HEAD=$(git log --oneline -1)
 IMAGE=$(pwd)/$DEVICE_CODENAME/out/arch/arm64/boot/Image.gz-dtb
 DATE=$(date "+%B %-d, %Y")
 ZIP_DATE=$(date +"%Y%m%d")
@@ -77,6 +76,7 @@ tg_post_msg "<b>$KERNEL_NAME Triggered Build</b>%0A<b>Triggered by: </b><code>be
 # Compile
 compile(){
 cd ${KERNEL_ROOTDIR}
+COMMIT_HEAD=$(git log --oneline -1)
 tg_post_msg "<b>Last commit: </b>$COMMIT_HEAD"
 make -j$(nproc) O=out ARCH=arm64 SUBARCH=arm64 ${DEVICE_DEFCONFIG}
 make -j$(nproc) ARCH=arm64 SUBARCH=arm64 O=out \
