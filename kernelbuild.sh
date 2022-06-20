@@ -77,7 +77,7 @@ tg_post_msg "<b>$KERNEL_NAME Triggered Build</b>%0A<b>Triggered by: </b><code>be
 compile(){
 cd ${KERNEL_ROOTDIR}
 COMMIT_HEAD=$(git log --oneline -1)
-tg_post_msg "<b>commit:</b> <code>$COMMIT_HEAD</code>"
+tg_post_msg "<b>commit: </b><code>$COMMIT_HEAD</code>"
 make -j$(nproc) O=out ARCH=arm64 SUBARCH=arm64 ${DEVICE_DEFCONFIG}
 make -j$(nproc) ARCH=arm64 SUBARCH=arm64 O=out \
     CC=${CLANG_ROOTDIR}/bin/clang \
