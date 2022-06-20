@@ -22,7 +22,7 @@ git clone --depth=1 $KERNEL_SOURCE -b hmp $DEVICE_CODENAME
 # git clone --depth=1 https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r450784.git clang-aosp
 git clone --depth=1 https://gitlab.com/STRK-ND/aosp-clang.git clang-aosp 
 git clone --depth=1 https://github.com/cbendot/gcc-aarch64.git gcc64
-git clone --depth=1 https://github.com/cbendot/gcc-armv7.git gcc32
+git clone --depth=1 https://github.com/cbendot/gcc-armv5.git gcc32
 
 # Main Declaration
 KERNEL_ROOTDIR=$(pwd)/$DEVICE_CODENAME # IMPORTANT ! Fill with your kernel source root directory.
@@ -37,8 +37,8 @@ export KBUILD_BUILD_HOST=$BUILD_HOST # Change with your own hostname.
 # Main Declaration
 CLANG_VER="$("$CLANG_ROOTDIR"/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
 # LLD_VER="$("$CLANG_ROOTDIR"/bin/ld.lld --version | head -n 1)"
-GCC_VER="$("$GCC64_ROOTDIR"/bin/aarch64-buildroot-linux-gnu-gcc --version | head -n 1)"
-export KBUILD_COMPILER_STRING="$CLANG_VER with $GCC_VER"
+# GCC_VER="$("$GCC64_ROOTDIR"/bin/aarch64-buildroot-linux-gnu-gcc --version | head -n 1)"
+export KBUILD_COMPILER_STRING="$CLANG_VER with gcc (Buildroot toolchains.bootlin.com-2021.11-1) 11.2.0"
 IMAGE=$(pwd)/$DEVICE_CODENAME/out/arch/arm64/boot/Image.gz-dtb
 DATE=$(date "+%B %-d, %Y")
 ZIP_DATE=$(date +"%Y%m%d")
@@ -71,13 +71,13 @@ tg_post_msg() {
 }
 
 # Post Main Information
-tg_post_msg "<b>$KERNEL_NAME Triggered Build</b>%0A<b>Triggered by: </b><code>ben863</code>%0A<b>Build For: </b><code>$DEVICE_CODENAME</code>%0A<b>Build Date: </b><code>$DATE</code>%0A<b>Pipelines Hosts: </b><code>DroneCI</code>%0A<b>Source:</b> $KERNEL_SOURCE%0A<b>Toolchain Information:</b>%0A<code>${KBUILD_COMPILER_STRING}</code>"
+tg_post_msg "<b>$KERNEL_NAME Triggered Build</b>%0A<b>Triggered by: </b><code>ben863</code>%0A<b>Build For: </b><code>$DEVICE_CODENAME</code>%0A<b>Build Date: </b><code>$DATE</code>%0A<b>Pipelines Hosts: </b><code>DroneCI</code>%0A<b>Source:</b> <code>$KERNEL_SOURCE</code>%0A<b>Toolchain Information:</b>%0A<code>${KBUILD_COMPILER_STRING}</code>"
 
 # Compile
 compile(){
 cd ${KERNEL_ROOTDIR}
 COMMIT_HEAD=$(git log --oneline -1)
-tg_post_msg "<b>Last commit: </b>$COMMIT_HEAD"
+tg_post_msg "<b>commit:</b> <code>$COMMIT_HEAD</code>"
 make -j$(nproc) O=out ARCH=arm64 SUBARCH=arm64 ${DEVICE_DEFCONFIG}
 make -j$(nproc) ARCH=arm64 SUBARCH=arm64 O=out \
     CC=${CLANG_ROOTDIR}/bin/clang \
@@ -88,7 +88,7 @@ make -j$(nproc) ARCH=arm64 SUBARCH=arm64 O=out \
     STRIP=${CLANG_ROOTDIR}/bin/llvm-strip \
     CLANG_TRIPLE=${GCC64_ROOTDIR}/aarch64-buildroot-linux-gnu- \
     CROSS_COMPILE=${GCC64_ROOTDIR}/bin/aarch64-buildroot-linux-gnu- \
-    CROSS_COMPILE_ARM32=${GCC32_ROOTDIR}/bin/arm-buildroot-linux-gnueabihf-
+    CROSS_COMPILE_ARM32=${GCC32_ROOTDIR}/bin/arm-buildroot-linux-gnueabi-
 
    if ! [ -a "$IMAGE" ]; then
 	finerr
@@ -123,7 +123,7 @@ function finerr() {
 # Zipping
 function zipping() {
     cd AnyKernel || exit 1
-    zip -r9 $KERNEL_NAME-HMP-${ZIP_DATE}.zip *
+    zip -r9 [OC]$KERNEL_NAME-HMP-${ZIP_DATE}.zip *
     cd ..
 
 }
