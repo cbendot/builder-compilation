@@ -15,6 +15,7 @@
 # BUILD_USER | Your username
 # BUILD_HOST | Your hostname
 
+START=$(date +"%s")
 echo "|| Downloading few Dependecies . . .||"
 # Kernel Sources
 git clone --depth=1 $KERNEL_SOURCE -b hmp $DEVICE_CODENAME
@@ -42,7 +43,6 @@ export KBUILD_COMPILER_STRING="$CLANG_VER with gcc (Buildroot toolchains.bootlin
 IMAGE=$(pwd)/$DEVICE_CODENAME/out/arch/arm64/boot/Image.gz-dtb
 DATE=$(date "+%B %-d, %Y")
 ZIP_DATE=$(date +"%Y%m%d")
-START=$(date +"%s")
 
 # Checking environtment
 # Warning !! Dont Change anything there without known reason.
