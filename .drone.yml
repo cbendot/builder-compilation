@@ -24,4 +24,5 @@ steps:
      GL_PUSH_REPO_URL:
        from_secret: GL_PUSH_REPO_URL
    commands:
+          - apt-get install git lfs -y && git lfs install
           - bash llvm-tc_build.sh
