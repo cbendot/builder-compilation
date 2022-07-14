@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 #
-# Copyright (C) 2021 a xyzprjkt property
+# Copyright (C) 2022 a xyzprjkt property
 #
 
 # Needed Secret Variable
@@ -18,17 +18,15 @@
 START=$(date +"%s")
 echo "|| Downloading few Dependecies . . .||"
 # Kernel Sources
-git clone --depth=1 $KERNEL_SOURCE -b hmp $DEVICE_CODENAME
-# git clone --depth=1 https://gitlab.com/ben863/elastics-clang clang-aosp # Elastics set as Clang Default
-# git clone --depth=1 https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r450784.git clang-aosp
-git clone --depth=1 https://gitlab.com/STRK-ND/aosp-clang.git clang-aosp 
+git clone --depth=1 $KERNEL_SOURCE -b eas $DEVICE_CODENAME
+git clone --depth=1 https://github.com/cbendot/aosp-clang.git aosp-clang 
 git clone --depth=1 https://github.com/cbendot/gcc-aarch64.git gcc64
 git clone --depth=1 https://github.com/cbendot/gcc-armv5.git gcc32
 
 # Main Declaration
 KERNEL_ROOTDIR=$(pwd)/$DEVICE_CODENAME # IMPORTANT ! Fill with your kernel source root directory.
 DEVICE_DEFCONFIG=$DEVICE_DEFCONFIG # IMPORTANT ! Declare your kernel source defconfig file here.
-CLANG_ROOTDIR=$(pwd)/clang-aosp # IMPORTANT! Put your clang directory here.
+CLANG_ROOTDIR=$(pwd)/aosp-clang # IMPORTANT! Put your clang directory here.
 # LLVM_ROOTDIR=$(pwd)/clang-llvm
 GCC64_ROOTDIR=$(pwd)/gcc64
 GCC32_ROOTDIR=$(pwd)/gcc32
@@ -123,7 +121,7 @@ function finerr() {
 # Zipping
 function zipping() {
     cd AnyKernel || exit 1
-    zip -r9 $KERNEL_NAME-HMP-${ZIP_DATE}.zip *
+    zip -r9 $KERNEL_NAME-EAS-${ZIP_DATE}.zip *
     cd ..
 
 }
