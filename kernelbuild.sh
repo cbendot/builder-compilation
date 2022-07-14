@@ -19,7 +19,7 @@ START=$(date +"%s")
 echo "|| Downloading few Dependecies . . .||"
 # Kernel Sources
 git clone --depth=1 $KERNEL_SOURCE -b eas $DEVICE_CODENAME
-git clone --depth=1 https://github.com/cbendot/aosp-clang.git aosp-clang 
+git clone --depth=1 https://gitlab.com/ben863/aosp-clang.git aosp-clang 
 git clone --depth=1 https://github.com/cbendot/gcc-aarch64.git gcc64
 git clone --depth=1 https://github.com/cbendot/gcc-armv5.git gcc32
 
