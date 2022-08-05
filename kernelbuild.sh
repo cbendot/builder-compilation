@@ -18,7 +18,7 @@
 START=$(date +"%s")
 echo "|| Downloading few Dependecies . . .||"
 # Kernel Sources
-git clone --depth=1 $KERNEL_SOURCE -b hmp $DEVICE_CODENAME
+git clone --depth=1 $KERNEL_SOURCE -b eas $DEVICE_CODENAME
 git clone --depth=1 https://gitlab.com/ben863/aosp-clang.git aosp-clang 
 git clone --depth=1 https://github.com/cbendot/gcc-aarch64.git gcc64
 git clone --depth=1 https://github.com/cbendot/gcc-armv5.git gcc32
@@ -121,7 +121,7 @@ function finerr() {
 # Zipping
 function zipping() {
     cd AnyKernel || exit 1
-    zip -r9 $KERNEL_NAME-HMP-${ZIP_DATE}.zip *
+    zip -r9 $KERNEL_NAME-EAS-${ZIP_DATE}.zip *
     cd ..
 
 }
