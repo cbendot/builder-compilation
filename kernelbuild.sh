@@ -19,7 +19,8 @@ START=$(date +"%s")
 echo "|| Downloading few Dependecies . . .||"
 # Kernel Sources
 git clone --depth=1 $KERNEL_SOURCE -b msm-4.4-eas $DEVICE_CODENAME
-git clone --depth=1 https://gitlab.com/ben863/aosp-clang.git aosp-clang 
+git clone --depth=1 https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r445002.git aosp-clang
+# git clone --depth=1 https://gitlab.com/ben863/aosp-clang.git aosp-clang 
 git clone --depth=1 https://github.com/cbendot/gcc-aarch64.git gcc64
 git clone --depth=1 https://github.com/cbendot/gcc-armv5.git gcc32
 
