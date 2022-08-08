@@ -17,9 +17,9 @@
 
 echo "|| Downloading few Dependecies . . .||"
 # Kernel Sources
-git clone --depth=1 $KERNEL_SOURCE -b hmp $DEVICE_CODENAME
+git clone --depth=1 $KERNEL_SOURCE -b msm-4.4-eas $DEVICE_CODENAME
 git clone --depth=1 https://github.com/cbendot/gcc-aarch64.git gcc64 # gcc64 set as Default
-git clone --depth=1 https://github.com/cbendot/gcc-armv7.git gcc32 # gcc32 set as Default
+git clone --depth=1 https://github.com/cbendot/gcc-armv5.git gcc32 # gcc32 set as Default
 # git clone --deoth=1 https://github.com/mvaisakh/gcc-arm64.git gcc64 # gcc64 set as Default
 # git clone --depth=1 https://github.com/mvaisakh/gcc-arm.git gcc32 # gcc32 set as Default
 
@@ -29,8 +29,8 @@ DEVICE_DEFCONFIG=$DEVICE_DEFCONFIG # IMPORTANT ! Declare your kernel source defc
 # CLANG_ROOTDIR=$(pwd)/clang
 GCC64_ROOTDIR=$(pwd)/gcc64 # IMPORTANT! Put your GCC directory here.
 GCC32_ROOTDIR=$(pwd)/gcc32 # IMPORTANT! Put your GCC directory here.
-export KBUILD_BUILD_USER=$BUILD_USER # Change with your own name or else.
-export KBUILD_BUILD_HOST=$BUILD_HOST # Change with your own hostname.
+# export KBUILD_BUILD_USER=$BUILD_USER # Change with your own name or else.
+# export KBUILD_BUILD_HOST=$BUILD_HOST # Change with your own hostname.
 
 # Main Declaration
 # CLANG_VER="$("$CLANG_ROOTDIR"/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
@@ -118,7 +118,7 @@ function finerr() {
 # Zipping
 function zipping() {
     cd AnyKernel || exit 1
-    zip -r9 $KERNEL_NAME-HMP-${ZIP_DATE}.zip *
+    zip -r9 $KERNEL_NAME-EAS-${ZIP_DATE}.zip *
     cd ..
 
 }
