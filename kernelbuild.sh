@@ -18,7 +18,7 @@
 START=$(date +"%s")
 echo "|| Downloading few Dependecies . . .||"
 # Kernel Sources
-git clone --depth=1 $KERNEL_SOURCE -b eas $DEVICE_CODENAME
+git clone --depth=1 $KERNEL_SOURCE -b msm-4.4-eas $DEVICE_CODENAME
 git clone --depth=1 https://gitlab.com/ben863/aosp-clang.git aosp-clang 
 git clone --depth=1 https://github.com/cbendot/gcc-aarch64.git gcc64
 git clone --depth=1 https://github.com/cbendot/gcc-armv5.git gcc32
@@ -30,8 +30,6 @@ CLANG_ROOTDIR=$(pwd)/aosp-clang # IMPORTANT! Put your clang directory here.
 # LLVM_ROOTDIR=$(pwd)/clang-llvm
 GCC64_ROOTDIR=$(pwd)/gcc64
 GCC32_ROOTDIR=$(pwd)/gcc32
-export KBUILD_BUILD_USER=$BUILD_USER # Change with your own name or else.
-export KBUILD_BUILD_HOST=$BUILD_HOST # Change with your own hostname.
 
 # Main Declaration
 CLANG_VER="$("$CLANG_ROOTDIR"/bin/clang --version | head -n 1 | perl -pe 's/\(http.*?\)//gs' | sed -e 's/  */ /g' -e 's/[[:space:]]*$//')"
@@ -121,7 +119,7 @@ function finerr() {
 # Zipping
 function zipping() {
     cd AnyKernel || exit 1
-    zip -r9 $KERNEL_NAME-EAS-${ZIP_DATE}.zip *
+    zip -r9 [OC]$KERNEL_NAME-EAS-${ZIP_DATE}.zip *
     cd ..
 
 }
