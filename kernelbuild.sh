@@ -23,10 +23,10 @@ git clone --depth=1 $KERNEL_SOURCE -b msm-4.4-eas $DEVICE_CODENAME
 # git clone --depth=1 https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r445002.git aosp-clang
 # git clone --depth=1 https://gitlab.com/ben863/aosp-clang.git aosp-clang
 git clone --depth=1 https://gitlab.com/STRK-ND/aosp-clang.git aosp-clang
-git clone --depth=1 https://gitlab.com/STRK-ND/aarch64-linux-android-4.9.git gcc64
-git clone --depth=1 https://gitlab.com/STRK-ND/arm-linux-androideabi-4.9.git gcc32
-# git clone --depth=1 https://github.com/cbendot/gcc-aarch64.git gcc64
-# git clone --depth=1 https://github.com/cbendot/gcc-armv5.git gcc32
+# git clone --depth=1 https://gitlab.com/STRK-ND/aarch64-linux-android-4.9.git gcc64
+# git clone --depth=1 https://gitlab.com/STRK-ND/arm-linux-androideabi-4.9.git gcc32
+git clone --depth=1 https://github.com/cbendot/gcc-aarch64.git gcc64
+git clone --depth=1 https://github.com/cbendot/gcc-armv5.git gcc32
 
 # Main Declaration
 KERNEL_ROOTDIR=$(pwd)/$DEVICE_CODENAME # IMPORTANT ! Fill with your kernel source root directory.
@@ -87,9 +87,9 @@ make -j$(nproc) ARCH=arm64 SUBARCH=arm64 O=out \
   	OBJCOPY=${CLANG_ROOTDIR}/bin/llvm-objcopy \
   	OBJDUMP=${CLANG_ROOTDIR}/bin/llvm-objdump \
     STRIP=${CLANG_ROOTDIR}/bin/llvm-strip \
-    CLANG_TRIPLE=${GCC64_ROOTDIR}/aarch64-linux-gnu- \
-    CROSS_COMPILE=${GCC64_ROOTDIR}/bin/aarch64-linux-android- \
-    CROSS_COMPILE_ARM32=${GCC32_ROOTDIR}/bin/arm-linux-androideabi-
+    CLANG_TRIPLE=${GCC64_ROOTDIR}/aarch64-buildroot-linux-gnu- \
+    CROSS_COMPILE=${GCC64_ROOTDIR}/bin/aarch64-buildroot-linux-gnu- \
+    CROSS_COMPILE_ARM32=${GCC32_ROOTDIR}/bin/arm-buildroot-linux-gnueabi-
 
    if ! [ -a "$IMAGE" ]; then
 	finerr
