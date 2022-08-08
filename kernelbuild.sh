@@ -83,7 +83,7 @@ make -j$(nproc) ARCH=arm64 O=out \
   	OBJDUMP=${GCC64_ROOTDIR}/bin/aarch64-buildroot-linux-gnu-objdump \
     STRIP=${GCC64_ROOTDIR}/bin/aarch64-buildroot-linux-gnu-strip \
     CROSS_COMPILE=${GCC64_ROOTDIR}/bin/aarch64-buildroot-linux-gnu- \
-    CROSS_COMPILE_ARM32=${GCC32_ROOTDIR}/bin/arm-buildroot-linux-gnueabihf-
+    CROSS_COMPILE_ARM32=${GCC32_ROOTDIR}/bin/arm-buildroot-linux-gnueabi-
 
    if ! [ -a "$IMAGE" ]; then
 	finerr
