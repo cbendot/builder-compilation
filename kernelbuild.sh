@@ -18,7 +18,7 @@
 START=$(date +"%s")
 echo "|| Downloading few Dependecies . . .||"
 # Kernel Sources
-git clone --depth=1 $KERNEL_SOURCE -b msm-4.4-hmp $DEVICE_CODENAME
+git clone --depth=1 https://github.com/LineageOS/android_kernel_xiaomi_sm6125.git -b lineage-18.1 ginkgo
 git clone --depth=1 https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r445002.git aosp-clang
 # git clone --depth=1 https://gitlab.com/ben863/aosp-clang.git aosp-clang
 # git clone --depth=1 https://gitlab.com/STRK-ND/aarch64-linux-android-4.9.git gcc64
@@ -27,8 +27,8 @@ git clone --depth=1 https://github.com/cbendot/gcc-aarch64.git gcc64
 git clone --depth=1 https://github.com/cbendot/gcc-armv5.git gcc32
 
 # Main Declaration
-KERNEL_ROOTDIR=$(pwd)/$DEVICE_CODENAME # IMPORTANT ! Fill with your kernel source root directory.
-DEVICE_DEFCONFIG=$DEVICE_DEFCONFIG # IMPORTANT ! Declare your kernel source defconfig file here.
+KERNEL_ROOTDIR=$(pwd)/ginkgo # IMPORTANT ! Fill with your kernel source root directory.
+DEVICE_DEFCONFIG=ginkgo-perf_defconfig # IMPORTANT ! Declare your kernel source defconfig file here.
 CLANG_ROOTDIR=$(pwd)/aosp-clang # IMPORTANT! Put your clang directory here.
 # LLVM_ROOTDIR=$(pwd)/clang-llvm
 GCC64_ROOTDIR=$(pwd)/gcc64
@@ -70,7 +70,7 @@ tg_post_msg() {
 }
 
 # Post Main Information
-tg_post_msg "<b>$KERNEL_NAME Triggered Build</b>%0A<b>Triggered by: </b><code>ben863</code>%0A<b>Build For: </b><code>$DEVICE_CODENAME</code>%0A<b>Build Date: </b><code>$DATE</code>%0A<b>Pipelines Hosts: </b><code>DroneCI</code>%0A<b>Source:</b> <code>$KERNEL_SOURCE</code>%0A<b>Toolchain Information:</b>%0A<code>${KBUILD_COMPILER_STRING}</code>"
+tg_post_msg "<b>$KERNEL_NAME Triggered Build</b>%0A<b>Triggered by: </b><code>ben863</code>%0A<b>Build For: </b><code>Redmi Note 8 ginkgo</code>%0A<b>Build Date: </b><code>$DATE</code>%0A<b>Pipelines Hosts: </b><code>DroneCI</code>%0A<b>Source:</b> <code>https://github.com/LineageOS/android_kernel_xiaomi_sm6125.git</code>%0A<b>Toolchain Information:</b>%0A<code>${KBUILD_COMPILER_STRING}</code>"
 
 # Compile
 compile(){
@@ -122,7 +122,7 @@ function finerr() {
 # Zipping
 function zipping() {
     cd AnyKernel || exit 1
-    zip -r9 [OC]$KERNEL_NAME-HMP-${ZIP_DATE}.zip *
+    zip -r9 $KERNEL_NAME-ginkgo-${ZIP_DATE}.zip *
     cd ..
 
 }
