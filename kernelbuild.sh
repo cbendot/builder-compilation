@@ -28,7 +28,7 @@ git clone --depth=1 https://github.com/cbendot/gcc-armv5.git gcc32
 
 # Main Declaration
 KERNEL_ROOTDIR=$(pwd)/ginkgo # IMPORTANT ! Fill with your kernel source root directory.
-DEVICE_DEFCONFIG=ginkgo-perf_defconfig # IMPORTANT ! Declare your kernel source defconfig file here.
+DEVICE_DEFCONFIG=vendor/ginkgo-perf_defconfig # IMPORTANT ! Declare your kernel source defconfig file here.
 CLANG_ROOTDIR=$(pwd)/aosp-clang # IMPORTANT! Put your clang directory here.
 # LLVM_ROOTDIR=$(pwd)/clang-llvm
 GCC64_ROOTDIR=$(pwd)/gcc64
