@@ -18,7 +18,7 @@
 START=$(date +"%s")
 echo "|| Downloading few Dependecies . . .||"
 # Kernel Sources
-git clone --depth=1 https://github.com/ArrowOS-Devices/android_kernel_xiaomi_ginkgo.git -b arrow-11.0 ginkgo
+git clone --depth=1 https://github.com/cbendot/android_kernel_xiaomi_ginkgo.git -b arrow-11.0 ginkgo
 git clone --depth=1 https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r445002.git aosp-clang
 # git clone --depth=1 https://gitlab.com/ben863/aosp-clang.git aosp-clang
 # git clone --depth=1 https://gitlab.com/STRK-ND/aarch64-linux-android-4.9.git gcc64
@@ -70,7 +70,7 @@ tg_post_msg() {
 }
 
 # Post Main Information
-tg_post_msg "<b>$KERNEL_NAME Triggered Build</b>%0A<b>Triggered by: </b><code>ben863</code>%0A<b>Build For: </b><code>Redmi Note 8 ginkgo</code>%0A<b>Build Date: </b><code>$DATE</code>%0A<b>Pipelines Hosts: </b><code>DroneCI</code>%0A<b>Source:</b> <code>https://github.com/LineageOS/android_kernel_xiaomi_sm6125.git</code>%0A<b>Toolchain Information:</b>%0A<code>${KBUILD_COMPILER_STRING}</code>"
+tg_post_msg "<b>$KERNEL_NAME Triggered Build</b>%0A<b>Triggered by: </b><code>ben863</code>%0A<b>Build For: </b><code>Redmi Note 8 ginkgo</code>%0A<b>Build Date: </b><code>$DATE</code>%0A<b>Pipelines Hosts: </b><code>DroneCI</code>%0A<b>Toolchain Information:</b>%0A<code>${KBUILD_COMPILER_STRING}</code>"
 
 # Compile
 compile(){
@@ -94,7 +94,7 @@ make -j$(nproc) ARCH=arm64 SUBARCH=arm64 O=out \
 	exit 1
    fi
 
-  git clone --depth=1 $ANYKERNEL AnyKernel
+  git clone --depth=1 $ANYKERNEL -b ginkgo AnyKernel
 	cp $IMAGE AnyKernel
 }
 
