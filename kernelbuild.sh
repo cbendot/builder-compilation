@@ -18,7 +18,7 @@
 START=$(date +"%s")
 echo "|| Downloading few Dependecies . . .||"
 # Kernel Sources
-git clone --depth=1 https://github.com/rasenss/android_kernel_xiaomi_ginkgo.git -b twelve ginkgo
+git clone --depth=1 https://git.codelinaro.org/clo/la/kernel/msm-4.14.git -b LA.UM.9.11.r1-05600-NICOBAR.QSSI12.0 ginkgo
 git clone --depth=1 https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r445002.git aosp-clang
 # git clone --depth=1 https://gitlab.com/ben863/aosp-clang.git aosp-clang
 # git clone --depth=1 https://gitlab.com/STRK-ND/aarch64-linux-android-4.9.git gcc64
@@ -28,7 +28,7 @@ git clone --depth=1 https://github.com/cbendot/gcc-armv5.git gcc32
 
 # Main Declaration
 KERNEL_ROOTDIR=$(pwd)/ginkgo # IMPORTANT ! Fill with your kernel source root directory.
-DEVICE_DEFCONFIG=vendor/ginkgo-perf_defconfig # IMPORTANT ! Declare your kernel source defconfig file here.
+DEVICE_DEFCONFIG=vendor/trinket-perf_defconfig # IMPORTANT ! Declare your kernel source defconfig file here.
 CLANG_ROOTDIR=$(pwd)/aosp-clang # IMPORTANT! Put your clang directory here.
 # LLVM_ROOTDIR=$(pwd)/clang-llvm
 GCC64_ROOTDIR=$(pwd)/gcc64
