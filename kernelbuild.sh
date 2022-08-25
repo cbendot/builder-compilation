@@ -18,7 +18,7 @@
 START=$(date +"%s")
 echo "|| Downloading few Dependecies . . .||"
 # Kernel Sources
-git clone --depth=1 https://github.com/rasenss/android_kernel_xiaomi_ginkgo.git -b twelve ginkgo
+git clone --depth=1 https://github.com/cbendot/android_kernel_xiaomi_ginkgo.git -b lineage-19.1 ginkgo
 # git clone --depth=1 https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r445002.git aosp-clang
 # git clone --depth=1 https://gitlab.com/ben863/aosp-clang.git aosp-clang
 git clone --depth=1 https://gitlab.com/ben863/azure-clang.git aosp-clang
@@ -88,7 +88,7 @@ make -j$(nproc) ARCH=arm64 SUBARCH=arm64 O=out \
     STRIP=${CLANG_ROOTDIR}/bin/llvm-strip \
 #    CLANG_TRIPLE=${GCC64_ROOTDIR}/aarch64-linux-gnu- \
     CROSS_COMPILE=${CLANG_ROOTDIR}/bin/aarch64-linux-gnu- \
-    CROSS_COMPILE_COMPAT=${CLANG_ROOTDIR}/bin/arm-linux-gnueabi-
+    CROSS_COMPILE_ARM32=${CLANG_ROOTDIR}/bin/arm-linux-gnueabi-
 
    if ! [ -a "$IMAGE" ]; then
 	finerr
