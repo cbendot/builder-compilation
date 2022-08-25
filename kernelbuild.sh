@@ -22,8 +22,8 @@ git clone --depth=1 https://github.com/cbendot/android_kernel_xiaomi_ginkgo.git 
 # git clone --depth=1 https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r445002.git aosp-clang
 # git clone --depth=1 https://gitlab.com/ben863/aosp-clang.git aosp-clang
 git clone --depth=1 https://gitlab.com/ben863/azure-clang.git aosp-clang
-# git clone --depth=1 https://gitlab.com/STRK-ND/aarch64-linux-android-4.9.git gcc64
-# git clone --depth=1 https://gitlab.com/STRK-ND/arm-linux-androideabi-4.9.git gcc32
+git clone --depth=1 https://gitlab.com/STRK-ND/aarch64-linux-android-4.9.git gcc64
+git clone --depth=1 https://gitlab.com/STRK-ND/arm-linux-androideabi-4.9.git gcc32
 # git clone --depth=1 https://github.com/cbendot/gcc-aarch64.git gcc64
 # git clone --depth=1 https://github.com/cbendot/gcc-armv5.git gcc32
 
@@ -86,9 +86,9 @@ make -j$(nproc) ARCH=arm64 SUBARCH=arm64 O=out \
   	OBJCOPY=${CLANG_ROOTDIR}/bin/llvm-objcopy \
   	OBJDUMP=${CLANG_ROOTDIR}/bin/llvm-objdump \
     STRIP=${CLANG_ROOTDIR}/bin/llvm-strip \
-#    CLANG_TRIPLE=${GCC64_ROOTDIR}/aarch64-linux-gnu- \
-    CROSS_COMPILE=${CLANG_ROOTDIR}/bin/aarch64-linux-gnu- \
-    CROSS_COMPILE_ARM32=${CLANG_ROOTDIR}/bin/arm-linux-gnueabi-
+    CLANG_TRIPLE=${GCC64_ROOTDIR}/aarch64-linux-gnu- \
+    CROSS_COMPILE=${GCC64_ROOTDIR}/bin/aarch64-linux-android- \
+    CROSS_COMPILE_ARM32=${GCC32_ROOTDIR}/bin/arm-linux-eabi-
 
    if ! [ -a "$IMAGE" ]; then
 	finerr
