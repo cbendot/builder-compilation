@@ -88,7 +88,7 @@ make -j$(nproc) ARCH=arm64 SUBARCH=arm64 O=out \
     STRIP=${CLANG_ROOTDIR}/bin/llvm-strip \
     CLANG_TRIPLE=${GCC64_ROOTDIR}/aarch64-linux-gnu- \
     CROSS_COMPILE=${GCC64_ROOTDIR}/bin/aarch64-linux-android- \
-    CROSS_COMPILE_ARM32=${GCC32_ROOTDIR}/bin/arm-linux-eabi-
+    CROSS_COMPILE_ARM32=${GCC32_ROOTDIR}/bin/arm-linux-androideabi-
 
    if ! [ -a "$IMAGE" ]; then
 	finerr
