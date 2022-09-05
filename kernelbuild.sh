@@ -12,8 +12,6 @@
 # ANYKERNEL | Your Anykernel link repository
 # TG_TOKEN | Your telegram bot token
 # TG_CHAT_ID | Your telegram private ci chat id
-# BUILD_USER | Your username
-# BUILD_HOST | Your hostname
 
 START=$(date +"%s")
 echo "|| Downloading few Dependecies . . .||"
