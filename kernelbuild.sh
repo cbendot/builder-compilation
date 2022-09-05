@@ -85,7 +85,7 @@ make -j$(nproc) ARCH=arm64 SUBARCH=arm64 O=out \
   	NM=${CLANG_ROOTDIR}/bin/llvm-nm \
   	OBJCOPY=${CLANG_ROOTDIR}/bin/llvm-objcopy \
   	OBJDUMP=${CLANG_ROOTDIR}/bin/llvm-objdump \
-#    LD=${CLANG_ROOTDIR}/bin/ld.lld \
+    LD=${CLANG_ROOTDIR}/bin/ld.lld \
     STRIP=${CLANG_ROOTDIR}/bin/llvm-strip \
     CLANG_TRIPLE=${GCC64_ROOTDIR}/aarch64-linux-gnu- \
     CROSS_COMPILE=${GCC64_ROOTDIR}/bin/aarch64-linux-android- \
