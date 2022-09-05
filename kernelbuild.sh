@@ -6,7 +6,7 @@
 # Needed Secret Variable
 # KERNEL_NAME | Your kernel name
 # KERNEL_SOURCE | Your kernel link source
-# KERNEL_BRANCH  | Your needed kernel branch if needed with -b. eg -b eleven_eas
+# KERNEL_BRANCH  | Your needed kernel branch if needed with -b. eg -b lineage-19.1
 # DEVICE_CODENAME | Your device codename
 # DEVICE_DEFCONFIG | Your device defconfig eg. ginkgo-perf_defconfig
 # ANYKERNEL | Your Anykernel link repository
