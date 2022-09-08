@@ -101,7 +101,7 @@ make -j$(nproc) ARCH=arm64 SUBARCH=arm64 O=out \
   exit 1
    fi
 
-  git clone --depth=1 $ANYKERNEL AnyKernel
+  git clone --depth=1 $ANYKERNEL -b asus AnyKernel
 	cp $IMAGE AnyKernel
 }
 
