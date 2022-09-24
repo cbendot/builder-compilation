@@ -89,7 +89,7 @@ make -j$(nproc) ARCH=arm64 SUBARCH=arm64 O=out \
   	OBJCOPY=${CLANG_ROOTDIR}/bin/llvm-objcopy \
   	OBJDUMP=${CLANG_ROOTDIR}/bin/llvm-objdump \
     STRIP=${CLANG_ROOTDIR}/bin/llvm-strip \
-    LD=${CLANG_ROOTDIR}/bin/ld.lld \
+#    LD=${CLANG_ROOTDIR}/bin/ld.lld \
     CLANG_TRIPLE=${GCC64_ROOTDIR}/aarch64-buildroot-linux-gnu- \
     CROSS_COMPILE=${GCC64_ROOTDIR}/bin/aarch64-buildroot-linux-gnu- \
     CROSS_COMPILE_ARM32=${GCC32_ROOTDIR}/bin/arm-buildroot-linux-gnueabi-
