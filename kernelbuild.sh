@@ -114,12 +114,12 @@ function push() {
 }
 
 # Fin Error
-error() {
+function finerr() {
     curl -s -X POST "https://api.telegram.org/bot$TG_TOKEN/sendMessage" \
         -d chat_id="$TG_CHAT_ID" \
         -d "disable_web_page_preview=true" \
         -d "parse_mode=markdown" \
-        -d text="❌ Build throw an error(s)%0A$(($DIFF / 60)) minute(s) and $(($DIFF % 60)) second(s)"
+        -d text="❌ Build throw an error(s)"
     exit 1
 }
 
