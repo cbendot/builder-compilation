@@ -94,8 +94,8 @@ make -j$(nproc) ARCH=arm64 SUBARCH=arm64 O=out \
     CROSS_COMPILE_ARM32=${GCC32_ROOTDIR}/bin/arm-buildroot-linux-gnueabi-
 
    if ! [ -a "$IMAGE" ]; then
-	error
-  exit 1
+	finerr
+	exit 1
    fi
 
   git clone --depth=1 $ANYKERNEL -b asus AnyKernel
