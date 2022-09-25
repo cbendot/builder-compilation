@@ -6,7 +6,7 @@
 # Needed Secret Variable
 # KERNEL_NAME | Your kernel name
 # KERNEL_SOURCE | Your kernel link source
-# KERNEL_BRANCH  | Your needed kernel branch if needed with -b. eg -b eleven_eas
+# KERNEL_BRANCH  | Your needed kernel branch if needed with -b. eg -b msm-4.4-eas
 # DEVICE_CODENAME | Your device codename
 # DEVICE_DEFCONFIG | Your device defconfig eg. lavender_defconfig
 # ANYKERNEL | Your Anykernel link repository
