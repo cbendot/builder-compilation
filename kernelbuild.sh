@@ -16,7 +16,8 @@
 START=$(date +"%s")
 echo "|| Downloading few Dependecies . . .||"
 # Kernel Sources
-git clone --depth=1 https://github.com/cbendot/android_kernel_xiaomi_ginkgo.git -b lineage-19.1 ginkgo
+# git clone --depth=1 https://github.com/cbendot/android_kernel_xiaomi_ginkgo.git -b lineage-19.1 ginkgo
+git clone --depth=1 https://github.com/fiqri19102002/android_kernel_xiaomi_ginkgo.git -b android-11 ginkgo
 git clone --depth=1 https://gitlab.com/crdroidandroid/android_prebuilts_clang_host_linux-x86_clang-r445002.git -b 12.1 aosp-clang
 # git clone --depth=1 https://gitlab.com/ben863/aosp-clang.git aosp-clang
 # git clone --depth=1 https://gitlab.com/ben863/azure-clang.git aosp-clang
